@@ -1,0 +1,46 @@
+# Omakase Ruby styling for Rails
+inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+
+# Overwrite or add rules to create your own house style
+#
+# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
+# Layout/SpaceInsideArrayLiteralBrackets:
+#   Enabled: false
+AllCops:
+  SuggestExtensions: false
+  Exclude:
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'coverage/**/*'
+    - 'db/**/*'
+    - 'lib/**/*'
+    - 'log/**/*'
+    - 'node_modules/**/*'
+    - 'public/**/*'
+    - 'storage/**/*'
+    - 'test/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'    
+Layout/LineLength:
+  Max: 200
+Style/Encoding:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+Style/Documentation:
+  Enabled: false
+Style/MethodCallWithArgsParentheses:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/MethodLength:
+  Max: 20
+Naming/VariableNumber:
+  Enabled: false
+Metrics/BlockLength:
+  Exclude:
+    # Because of JSON Builder
+    - 'app/views/**/*'
+
