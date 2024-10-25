@@ -1,5 +1,5 @@
 class IdeasController < ApplicationController
-  before_action :set_idea, only: %i[ show edit update destroy ]
+  before_action :set_idea, only: %i[show edit update destroy]
 
   # GET /ideas or /ideas.json
   def index
@@ -8,6 +8,7 @@ class IdeasController < ApplicationController
 
   # GET /ideas/1 or /ideas/1.json
   def show
+    @comments = @idea.comments
   end
 
   # GET /ideas/new
@@ -16,8 +17,7 @@ class IdeasController < ApplicationController
   end
 
   # GET /ideas/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /ideas or /ideas.json
   def create
@@ -58,13 +58,14 @@ class IdeasController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_idea
-      @idea = Idea.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def idea_params
-      params.require(:idea).permit(:name, :description, :picture)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_idea
+    @idea = Idea.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def idea_params
+    params.require(:idea).permit(:name, :description, :picture)
+  end
 end

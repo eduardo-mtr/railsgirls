@@ -1,18 +1,19 @@
-<%= form_with(model: idea) do |form| %>
+<%= form_with(model: idea, local: true) do |form| %>
+  <div id="error-popup" style="display: none; background: red; color: white; padding: 10px; position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000;text-align: center;">
+    <div style="margin-bottom: 2px;">
+      <span id="error-message"></span>
+      </div>
+    <button type="button" onclick="document.getElementById('error-popup').style.display='none'" style="margin-top: 10px;">Close</button>
+  </div>
+
   <% if idea.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(idea.errors.count, "error") %> prohibited this idea from being saved:</h2>
-
-      <ul>
-        <% idea.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
+    <script>
+      document.getElementById('error-message').innerText = "<%= idea.errors.full_messages.first.html_safe %>";
+      document.getElementById('error-popup').style.display = 'block';
+    </script>
   <% end %>
-
   <div>
-    <%= form.label :name, style: "display: block" %>
+    <%= form.label :"name *", style: "display: block" %>
     <%= form.text_field :name %>
   </div>
 
@@ -23,10 +24,13 @@
 
   <div>
     <%= form.label :picture, style: "display: block" %>
-    <%= form.text_field :picture %>
+    <%= form.file_field :picture %>
   </div>
 
   <div>
     <%= form.submit %>
   </div>
 <% end %>
+
+      <%# document.getElementById('error-message').innerHTML = "<%= idea.errors.full_messages.first.html_safe %>
+
